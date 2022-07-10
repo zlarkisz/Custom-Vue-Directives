@@ -1,16 +1,37 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <h1
+    v-if="show"
+    v-switching-color:fast.underline.textcenter="colors">
+    Hello Vue3 directives
+  </h1>
+
+  <button @click.stop.prevent="show = !show">Click</button>
+
+  <h2>Click outside</h2>
+
+  <div v-click-ouside="clickedOutside" class="box">Here is some text</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
+
+  data() {
+    return {
+      colors: ['red', 'gold', 'pink', 'blue'],
+      show: false
+    }
+  },
+
+  mounted () {
+    this.colors.push('purple');
+  },
+
+  methods: {
+    clickedOutside() {
+      alert('you are click outside 👅')
+    }
+  },
 }
 </script>
 
@@ -22,5 +43,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.box {
+  height: 500px;
+  width: 300px;
+  border: 1px solid #000;
 }
 </style>
